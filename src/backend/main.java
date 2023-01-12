@@ -14,16 +14,30 @@ public class main {
 	private HashMap<String, HashMap<String, String>> Product_Data_Map = new HashMap<String, HashMap<String, String>>();
 	private HashMap<String, String> Product_Code_Map = new HashMap<String, String>();
 	private String[] Product_Data_Map_Innermap_Keys = {"바코드", "상품명", "규격", "분류", "거래처", "매입단가", "이익률", "10원이하", "판매단가", "재고량", "적정재고량", "반품불가", "환불불가", "19세미만금지"};
+	private TestDBC T = new TestDBC();
 	
 	public static void main(String[] args) {
 		main M = new main();
-		M.read("/Volumes/T7/workspace/Mart_Manager_Program/program_windowbuilder/program/src/testfile/test.csv", "euc-kr");
-		for(String Key : M.Product_Data_Map_Innermap_Keys)
-			System.out.println(M.Product_Data_Map.get("1").get(Key));
+//		M.read("/Volumes/T7/workspace/Mart_Manager_Program/program_windowbuilder/program/src/testfile/test.csv", "euc-kr");
+//		for(String Key : M.Product_Data_Map_Innermap_Keys)
+//			System.out.println(M.Product_Data_Map.get("1").get(Key));
+//		for(String Key : M.Product_Data_Map_Innermap_Keys)
+//			System.out.println(M.Product_Data_Map.get("2").get(Key));
 	}
 	
 	public void setUp() {
-
+		
+	}
+	
+	public void find_by(main M, String[] by, String[] things) {
+		
+//		try {
+//			
+//		}
+//		catch () {
+//			
+//		}
+		
 	}
 	
 	public void read(String path, String encoding) {
