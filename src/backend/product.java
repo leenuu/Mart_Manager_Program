@@ -1,6 +1,6 @@
 package backend;
 
-public class product_Info {
+public class product{
 	
 	String name;
 	String code;
@@ -16,11 +16,11 @@ public class product_Info {
 	boolean ND; // Non_Discount
 	boolean UN; // Under_NineTeen
 	
-	public product_Info() {
+	public product() {
 		
 	}
 	
-	public product_Info(String name, String code, String size, String classification, String source, float UPP, float USP, float profit, int stock, int PS, boolean NR, boolean ND, boolean UN) {
+	public product(String name, String code, String size, String classification, String source, float UPP, float USP, float profit, int stock, int PS, boolean NR, boolean ND, boolean UN) {
 		this.name = name;
 		this.code = code;
 		this.size = size;

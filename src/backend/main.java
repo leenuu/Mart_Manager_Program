@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class main {
 	
 	TestDBC T;
-	HashMap<String, product_Info> P_Info = new HashMap<String, product_Info>();
+	HashMap<String, product> P_Info = new HashMap<String, product>();
 	private HashMap<String, String> P_Name_Code = new HashMap<String, String>();
 	
 	public static void main(String[] args) {
