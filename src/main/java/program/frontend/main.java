@@ -1,4 +1,4 @@
-package frontend;
+package program.frontend;
 
 import java.awt.EventQueue;
 import java.awt.event.*;

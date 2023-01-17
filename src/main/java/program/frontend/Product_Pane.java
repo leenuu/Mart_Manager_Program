@@ -1,4 +1,4 @@
-package frontend;
+package program.frontend;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
