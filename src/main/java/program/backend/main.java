@@ -28,10 +28,10 @@ public class main {
 	private Product pro3;
 
 	@Before
-	public void setUp() {
-		this.pro1 = new Product("1", "test1", "10g", "test", "test classification", 1000, 0, 0.5f, 100, 100, true, false, false);
-		this.pro2 = new Product("2", "test2", "20g", "test", "test classification", 1000, 0, 0.6f, 50, 100, true, false, true);
-		this.pro3 = new Product("3", "test3", "30g", "test", "test classification", 1000, 0, 0.7f, 120, 100, true, true, false);
+	public void set_Up() {
+		this.pro1 = new Product("test1", "1", "10g", "test", "test classification", 1000, 0, 0.5f, 100, 100, true, false, false);
+		this.pro2 = new Product("test2", "2", "20g", "test", "test classification", 1000, 0, 0.6f, 50, 100, true, false, true);
+		this.pro3 = new Product("test3", "3", "30g", "test", "test classification", 1000, 0, 0.7f, 120, 100, true, true, false);
 	}
 	@Test
 	public void test() {
@@ -39,13 +39,59 @@ public class main {
 		assertThat(3, is(3));
 	}
 	@Test
-	public void productTest()  throws SQLException{
+	public void product_Test()  throws SQLException {
 		dao.reset();
 		dao.add(pro1);
 		dao.add(pro2);
 		dao.add(pro3);
 
-		List<Product> proList = dao.getAll();
+		List<Product> proList = dao.get_All();
+		Check_Same_Product(proList.get(0), pro1);
+		Check_Same_Product(proList.get(1), pro2);
+		Check_Same_Product(proList.get(2), pro3);
+	}
+	@Test
+	public void Product_Get_By_Name() throws SQLException {
+		dao.reset();
+		dao.add(pro1);
+		dao.add(pro2);
+		dao.add(pro3);
+
+		Product P1 = dao.get_Product_By_Name(pro1.get_name());
+		Check_Same_Product(pro1, P1);
+	}
+	@Test
+	public void Product_Get_By_Names() throws SQLException {
+		dao.reset();
+		dao.add(pro1);
+		dao.add(pro2);
+		dao.add(pro3);
+
+		List<Product> proList = dao.get_Products_By_Name("te");
+		Check_Same_Product(proList.get(0), pro1);
+		Check_Same_Product(proList.get(1), pro2);
+		Check_Same_Product(proList.get(2), pro3);
+	}
+	@Test
+	public void Product_Get_By_Code() throws SQLException {
+		dao.reset();
+		dao.add(pro1);
+
+
+		Product P1 = dao.get_Product_By_Code("1");
+		Check_Same_Product(P1, pro1);
+	}
+	@Test
+	public void Product_Get_By_Codes() throws SQLException {
+		dao.reset();
+		pro1.set_code("123");
+		pro2.set_code("234");
+		pro3.set_code("356");
+		dao.add(pro1);
+		dao.add(pro2);
+		dao.add(pro3);
+
+		List<Product> proList = dao.get_Products_By_Code("3");
 		Check_Same_Product(proList.get(0), pro1);
 		Check_Same_Product(proList.get(1), pro2);
 		Check_Same_Product(proList.get(2), pro3);

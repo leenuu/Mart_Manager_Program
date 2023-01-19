@@ -35,11 +35,23 @@ public class Product_DAO {
 	public void add(final Product product) throws SQLException {
 		this.jdbcTemplate.update("insert into ProductInfom(name, code, size, classification, source, upp, usp, profit, stock, ps, nr, nd, un) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", product.get_name(), product.get_code(), product.get_size(), product.get_classification(), product.get_source(), product.get_UPP(), product.get_USP(), product.get_profit(), product.get_stock(), product.get_PS(), product.get_NR(), product.get_ND(), product.get_UN());
 	}
-	public List<Product> getAll() {
+	public List<Product> get_All() {
 		return this.jdbcTemplate.query("select * from ProductInfom order by id", this.userMappper);
 	}
 	public void reset() throws SQLException {
 		this.jdbcTemplate.update("TRUNCATE ProductInfom");
+	}
+	public Product get_Product_By_Name(String name) {
+		return this.jdbcTemplate.queryForObject("select * from ProductInfom where name = ?", new Object[] {name}, this.userMappper);
+	}
+	public List<Product> get_Products_By_Name(String name) {
+		return this.jdbcTemplate.query("select * from ProductInfom where name like '%" + name + "%' order by id", this.userMappper);
+	}
+	public Product get_Product_By_Code(String code) {
+		return this.jdbcTemplate.queryForObject("select * from ProductInfom where code = ?", new Object[] {code}, this.userMappper);
+	}
+	public List<Product> get_Products_By_Code(String code) {
+		return this.jdbcTemplate.query("select * from ProductInfom where code like '%" + code + "%' order by id", this.userMappper);
 	}
 //	public HashMap<String, Product> get_all_P() {
 //		HashMap<String, Product> all_P = new HashMap<String, Product>();
