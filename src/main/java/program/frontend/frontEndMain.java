@@ -4,22 +4,13 @@ import java.awt.EventQueue;
 import java.awt.event.*;
 
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JInternalFrame;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.JCheckBox;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
-public class main {
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
+public class frontEndMain {
+	private ApplicationContext applicationContext = new GenericXmlApplicationContext("/context.xml");
 	private JFrame frame;
 	private JButton Product_Btn;
 	private JButton Sales_Btn;
@@ -28,10 +19,7 @@ public class main {
 	private JButton Accounting_Btn;
 	private JButton Statistics_Btn;
 	private JButton Member_Btn;
-	
-	
-	private JPanel Product_P;
-
+	private Product_Pane ProductPenel;
 	/**
 	 * Launch the application.
 	 */
@@ -47,15 +35,27 @@ public class main {
 //			}
 //		});
 //	}
-
 	/**
 	 * Create the application.
 	 */
-	public main() {
-		initialize();
+//	public frontEndMain() {
+//		initialize();
+//		Init_Component_Connection();
+//	}
+	public static void start() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frontEndMain window = new frontEndMain();
+					window.initialize();
+					window.Init_Component_Connection();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-	
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -93,21 +93,22 @@ public class main {
 		Member_Btn = new JButton("회원");
 		Member_Btn.setBounds(6, 606, 88, 88);
 		frame.getContentPane().add(Member_Btn);
-		
-		Product_P = new Product_Pane().Product_P;
-		Product_P.setBounds(106, 6, 1174, 678);
-		frame.getContentPane().add(Product_P);
-		
-		Init_Btn_Connection();
-		
+
+		ProductPenel = applicationContext.getBean("ProductPanel", program.frontend.Product_Pane.class);
+		ProductPenel.setBounds(106, 6, 1174, 678);
+		frame.getContentPane().add(ProductPenel);
 
 	}
-	
-	public void Init_Btn_Connection() {
-		Product_Btn.addActionListener(new ActionListener(){	      
+
+	private void Init_Component_Connection() {
+		Init_Btn_Connection();
+	}
+	private void Init_Btn_Connection() {
+		Product_Btn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			Product_P.setVisible(false);
+			ProductPenel.setVisible(false);
         	}
 		});
 	}
+
 }

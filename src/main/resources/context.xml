@@ -9,7 +9,10 @@
         <property name="username" value="root" />
         <property name="password" value="test" />
     </bean>
-    <bean id="userDao" class="program.backend.Product_DAO">
+    <bean id="productDao" class="program.backend.Product_DAO">
         <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="ProductPanel" class="program.frontend.Product_Pane">
+        <property name="productDao" ref="productDao"/>
     </bean>
 </beans>
