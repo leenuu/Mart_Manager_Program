@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/context.xml")
+@ContextConfiguration(locations = "/productDaoContext.xml")
 public class test_backend {
 	@Autowired
 	private Product_DAO productDao;

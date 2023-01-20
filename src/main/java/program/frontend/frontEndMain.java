@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class frontEndMain {
-	private ApplicationContext applicationContext = new GenericXmlApplicationContext("/context.xml");
+	private ApplicationContext applicationContext = new GenericXmlApplicationContext("/penelContext.xml");
 	private JFrame frame;
 	private JButton Product_Btn;
 	private JButton Sales_Btn;

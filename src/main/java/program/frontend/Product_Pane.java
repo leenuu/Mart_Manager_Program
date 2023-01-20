@@ -7,22 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import program.backend.*;
 public class Product_Pane extends JPanel {
-	Product_DAO productDao;
+	private Product_DAO productDao;
 	public void setProductDao(Product_DAO productDao) {
 		this.productDao = productDao;
 	}
+	private String Header[];
+	private String Contents[][];
+
 	private JPanel P_1;
 	private JPanel P_2;
 	private JPanel P_3;
@@ -30,6 +26,7 @@ public class Product_Pane extends JPanel {
 	
 	private JTextField Search_Text;
 	private JTable Search_Table;
+	private JScrollPane Search_Table_Scroll;
 	private JComboBox Search_Combo;
 	private JButton Search_Btn;
 	private JTextField P_Name_Text;
@@ -52,10 +49,14 @@ public class Product_Pane extends JPanel {
 		this.setBounds(106, 6, 1174, 678);
 		this.setLayout(null);
 
-		Search_Table = new JTable();
+		Header = new String[] {"바코드", "상품명", "분류", "유통사", "재고", "매입가", "판매가"};
+		Contents = new String[][] {};
+		Search_Table = new JTable(Contents, Header);
+		Search_Table_Scroll = new JScrollPane(Search_Table);
 		Search_Table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		Search_Table.setBounds(6, 346, 1162, 326);
-		this.add(Search_Table);
+		Search_Table_Scroll.setBounds(6, 346, 1162, 326);
+		this.add(Search_Table_Scroll);
 
 		P_1 = new JPanel();
 		P_1.setBorder(new LineBorder(new Color(0, 0, 0)));
