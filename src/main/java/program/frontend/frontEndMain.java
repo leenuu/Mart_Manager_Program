@@ -106,8 +106,13 @@ public class frontEndMain {
 	private void Init_Btn_Connection() {
 		Product_Btn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			ProductPenel.setVisible(false);
+			ProductPenel.setVisible(true);
         	}
+		});
+		Sales_Btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductPenel.setVisible(false);
+			}
 		});
 	}
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import program.backend.*;
 public class Product_Pane extends JPanel {
@@ -17,7 +18,7 @@ public class Product_Pane extends JPanel {
 		this.productDao = productDao;
 	}
 	private String Header[];
-	private String Contents[][];
+	private DefaultTableModel model;
 
 	private JPanel P_1;
 	private JPanel P_2;
@@ -50,8 +51,11 @@ public class Product_Pane extends JPanel {
 		this.setLayout(null);
 
 		Header = new String[] {"바코드", "상품명", "분류", "유통사", "재고", "매입가", "판매가"};
-		Contents = new String[][] {};
-		Search_Table = new JTable(Contents, Header);
+		model = new DefaultTableModel(Header,0);
+		Search_Table = new JTable(model);
+		Search_Table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//		Contents = new String[][] {};
+//		Search_Table = new JTable(Contents, Header);
 		Search_Table_Scroll = new JScrollPane(Search_Table);
 		Search_Table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		Search_Table.setBounds(6, 346, 1162, 326);
@@ -246,8 +250,12 @@ public class Product_Pane extends JPanel {
 					productsList = productDao.get_Products_By_Code(Search_Text.getText());
 				}
 				else if(Search_Combo.getSelectedItem().equals("상품명")) {
+//					Product T = new Product();
 					System.out.println("상품명");
 					productsList = productDao.get_Products_By_Name(Search_Text.getText());
+					Search_Product();
+//					T = productDao.get_Product_By_Name(Search_Text.getText());
+//					System.out.println(T.get_code());
 				}
 	        }
 		});
@@ -255,6 +263,13 @@ public class Product_Pane extends JPanel {
 	}
 	private void Init_Table_Connection() {
 
+	}
+
+	private void Search_Product() {
+		DefaultTableModel model=(DefaultTableModel)Search_Table.getModel();
+//		String test[] = {"0", "1", "2", "3", "4", "5", "6", "7"};
+
+//		model.addRow();
 	}
 
 }
