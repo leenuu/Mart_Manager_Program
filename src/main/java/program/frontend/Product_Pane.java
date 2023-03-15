@@ -52,7 +52,12 @@ public class Product_Pane extends JPanel {
 
 		Header = new String[] {"바코드", "상품명", "분류", "유통사", "재고", "매입가", "판매가"};
 		model = new DefaultTableModel(Header,0);
-		Search_Table = new JTable(model);
+		Search_Table = new JTable(model) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		Search_Table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 //		Contents = new String[][] {};
 //		Search_Table = new JTable(Contents, Header);
@@ -238,38 +243,37 @@ public class Product_Pane extends JPanel {
 	}
 	private void Init_Component_Connection() {
 		Init_Btn_Connection();
-		Init_Table_Connection();
 	}
 	private void Init_Btn_Connection() {
 		Search_Btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Clicked");
-				if(Search_Combo.getSelectedItem().equals("바코드")) {
-					System.out.println("바코드");
-//					System.out.println(Search_Text.getText().getClass().getName());
-					productsList = productDao.get_Products_By_Code(Search_Text.getText());
-				}
-				else if(Search_Combo.getSelectedItem().equals("상품명")) {
-//					Product T = new Product();
-					System.out.println("상품명");
-					productsList = productDao.get_Products_By_Name(Search_Text.getText());
-					Search_Product();
-//					T = productDao.get_Product_By_Name(Search_Text.getText());
-//					System.out.println(T.get_code());
-				}
+				Search_Product((String)Search_Combo.getSelectedItem(), Search_Text.getText());
 	        }
 		});
 
 	}
-	private void Init_Table_Connection() {
-
-	}
-
-	private void Search_Product() {
+	private void Search_Product(String Combo, String search_text) {
 		DefaultTableModel model=(DefaultTableModel)Search_Table.getModel();
+		model.setNumRows(0);
+		if(Combo.equals("바코드"))
+			productsList = productDao.get_Products_By_Code(search_text);
+		else if(Combo.equals("상품명"))
+			productsList = productDao.get_Products_By_Name(search_text);
+
+//		System.out.println(productsList.size());
+//		System.out.println(productDao.get_Products_By_Name(search_text).get(0).get_code());
+//		System.out.println(productDao.get_Product_By_Name(search_text).get_code());
+
+		for(Product P : productsList) {
+			String[] row = {P.get_code(), P.get_name(), P.get_classification(), P.get_source(), Integer.toString(P.get_stock()), Float.toString(P.get_UPP()), Float.toString(P.get_USP())};
+			System.out.print(row);
+			model.addRow(row);
+		}
+
 //		String test[] = {"0", "1", "2", "3", "4", "5", "6", "7"};
 
-//		model.addRow();
+//		model.addRow(test);
 	}
 
 }
