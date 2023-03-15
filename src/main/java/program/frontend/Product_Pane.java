@@ -5,6 +5,8 @@ import program.backend.Product_DAO;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.*;
@@ -34,12 +36,16 @@ public class Product_Pane extends JPanel {
 	private JTextField P_Code_Text;
 	private JTextField P_Size_Text;
 	private JTextField P_Classification_Text;
-	private JTextField P_Account_Text;
+	private JTextField P_Soruce_Text;
 	private JTextField P_Unit_Purchase_Price_Text;
 	private JTextField P_Unit_Sales_Price_Text;
 	private JTextField P_Profit_Text;
 	private JTextField P_Stock_Text;
 	private JTextField P_Proper_Stock_Text;
+
+	private JCheckBox P_Non_Refundable_Cheack;
+	private JCheckBox P_Non_Discount_Cheack;
+	private JCheckBox P_Under_NineTeen_Cheack;
 
 	private List<Product> productsList;
 
@@ -134,10 +140,10 @@ public class Product_Pane extends JPanel {
 		this.add(P_2);
 		P_2.setLayout(null);
 
-		JLabel L_P_Account = new JLabel("거래처");
-		L_P_Account.setBounds(29, 0, 60, 55);
-		P_2.add(L_P_Account);
-		L_P_Account.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel L_P_Soruce = new JLabel("거래처");
+		L_P_Soruce.setBounds(29, 0, 60, 55);
+		P_2.add(L_P_Soruce);
+		L_P_Soruce.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel L_P_UPP = new JLabel("매입 단가");
 		L_P_UPP.setBounds(29, 69, 60, 55);
@@ -163,10 +169,10 @@ public class Product_Pane extends JPanel {
 		P_Rounds_Combo.setBounds(292, 137, 90, 55);
 		P_2.add(P_Rounds_Combo);
 
-		P_Account_Text = new JTextField();
-		P_Account_Text.setBounds(89, 0, 293, 55);
-		P_2.add(P_Account_Text);
-		P_Account_Text.setColumns(10);
+		P_Soruce_Text = new JTextField();
+		P_Soruce_Text.setBounds(89, 0, 293, 55);
+		P_2.add(P_Soruce_Text);
+		P_Soruce_Text.setColumns(10);
 
 		P_Unit_Purchase_Price_Text = new JTextField();
 		P_Unit_Purchase_Price_Text.setBounds(89, 67, 293, 55);
@@ -199,15 +205,15 @@ public class Product_Pane extends JPanel {
 		P_3.add(L_P_Proper_Stock);
 		L_P_Proper_Stock.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JCheckBox P_Non_Refundable_Cheack = new JCheckBox("반품 불가");
+		P_Non_Refundable_Cheack = new JCheckBox("반품 불가");
 		P_Non_Refundable_Cheack.setBounds(0, 134, 150, 27);
 		P_3.add(P_Non_Refundable_Cheack);
 
-		JCheckBox P_Non_Discount_Cheack = new JCheckBox("할인 불가");
+		P_Non_Discount_Cheack = new JCheckBox("할인 불가");
 		P_Non_Discount_Cheack.setBounds(0, 162, 150, 27);
 		P_3.add(P_Non_Discount_Cheack);
 
-		JCheckBox P_Under_NineTeen_Cheack = new JCheckBox("19세 미만 판매 금지");
+		P_Under_NineTeen_Cheack = new JCheckBox("19세 미만 판매 금지");
 		P_Under_NineTeen_Cheack.setBounds(162, 134, 150, 27);
 		P_3.add(P_Under_NineTeen_Cheack);
 
@@ -243,6 +249,7 @@ public class Product_Pane extends JPanel {
 	}
 	private void Init_Component_Connection() {
 		Init_Btn_Connection();
+		Init_Table_Connection();
 	}
 	private void Init_Btn_Connection() {
 		Search_Btn.addActionListener(new ActionListener() {
@@ -252,6 +259,37 @@ public class Product_Pane extends JPanel {
 	        }
 		});
 
+	}
+	private void Init_Table_Connection() {
+		Search_Table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(e.getClickCount() == 2)
+					{
+//						System.out.println(Search_Table.getValueAt(Search_Table.getSelectedRow(), 0).toString());
+						Product P = productsList.get(Search_Table.getSelectedRow());
+//						System.out.println(P.get_code());
+						Set_Text(P);
+					}
+				}
+			}
+		);
+	}
+	private void Set_Text(Product P) {
+		P_Name_Text.setText(P.get_name());
+		P_Code_Text.setText(P.get_code());
+		P_Size_Text.setText(P.get_size());
+		P_Classification_Text.setText(P.get_classification());
+		P_Soruce_Text.setText(P.get_source());
+		P_Unit_Purchase_Price_Text.setText(Float.toString(P.get_UPP()));
+		P_Unit_Sales_Price_Text.setText(Float.toString(P.get_UPP()));
+		P_Profit_Text.setText(Float.toString(P.get_profit()));
+		P_Stock_Text.setText(Integer.toString(P.get_stock()));
+		P_Proper_Stock_Text.setText(Integer.toString(P.get_PS()));
+
+		P_Non_Refundable_Cheack.setSelected(P.get_NR());
+		P_Non_Discount_Cheack.setSelected(P.get_ND());
+		P_Under_NineTeen_Cheack.setSelected(P.get_UN());
 	}
 	private void Search_Product(String Combo, String search_text) {
 		DefaultTableModel model=(DefaultTableModel)Search_Table.getModel();
