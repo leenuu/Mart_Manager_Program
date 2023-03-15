@@ -29,9 +29,9 @@ public class test_backend {
 
 	@Before
 	public void set_Up() {
-		this.pro1 = new Product("test1", "1", "10g", "test classification", "test", 1000, 0, 0.5f, 100, 100, true, false, false);
-		this.pro2 = new Product("test2", "2", "20g", "test classification", "test", 1000, 0, 0.6f, 50, 100, true, false, true);
-		this.pro3 = new Product("test3", "3", "30g", "test classification", "test", 1000, 0, 0.7f, 120, 100, true, true, false);
+		this.pro1 = new Product("test1", "1", "10g", "test classification", "test", 1000, 0, 0.5f, 100, 100, true, false, false, "Rounds");
+		this.pro2 = new Product("test2", "2", "20g", "test classification", "test", 1000, 0, 0.6f, 50, 100, true, false, true, "Up");
+		this.pro3 = new Product("test3", "3", "30g", "test classification", "test", 1000, 0, 0.7f, 120, 100, true, true, false, "Down");
 	}
 	@Test
 	public void test() {

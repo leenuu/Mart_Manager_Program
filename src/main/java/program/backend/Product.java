@@ -15,9 +15,10 @@ public class Product {
 	boolean NR; // Non_Refundable
 	boolean ND; // Non_Discount
 	boolean UN; // Under_NineTeen
+	String Rounds;
 	public Product() {
 	}
-	public Product(String name, String code, String size, String classification, String source, float UPP, float USP, float profit, int stock, int PS, boolean NR, boolean ND, boolean UN) {
+	public Product(String name, String code, String size, String classification, String source, float UPP, float USP, float profit, int stock, int PS, boolean NR, boolean ND, boolean UN, String Rounds) {
 		this.name = name;
 		this.code = code;
 		this.size = size;
@@ -31,6 +32,7 @@ public class Product {
 		this.NR = NR;
 		this.ND = ND;
 		this.UN = UN;
+		this.Rounds = Rounds;
 	}
 	public String get_name() {
 		return this.name;
@@ -71,6 +73,9 @@ public class Product {
 	public boolean get_UN() {
 		return this.UN;
 	}
+	public String get_Rounds() {
+		return this.Rounds;
+	}
 	public void set_name(String name) {
 		this.name = name;
 	}
@@ -109,6 +114,9 @@ public class Product {
 	}
 	public void set_UN(boolean UN) {
 		this.UN = UN;
+	}
+	public void set_Rounds(String Rounds) {
+		this.Rounds = Rounds;
 	}
 	
 }

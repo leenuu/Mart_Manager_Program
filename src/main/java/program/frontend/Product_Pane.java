@@ -31,6 +31,7 @@ public class Product_Pane extends JPanel {
 	private JTable Search_Table;
 	private JScrollPane Search_Table_Scroll;
 	private JComboBox Search_Combo;
+	private JComboBox P_Rounds_Combo;
 	private JButton Search_Btn;
 	private JTextField P_Name_Text;
 	private JTextField P_Code_Text;
@@ -165,7 +166,10 @@ public class Product_Pane extends JPanel {
 		P_2.add(L_P_Rounds);
 		L_P_Rounds.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JComboBox P_Rounds_Combo = new JComboBox();
+		P_Rounds_Combo = new JComboBox();
+		P_Rounds_Combo.addItem("올림");
+		P_Rounds_Combo.addItem("반올림");
+		P_Rounds_Combo.addItem("버림");
 		P_Rounds_Combo.setBounds(292, 137, 90, 55);
 		P_2.add(P_Rounds_Combo);
 
@@ -290,6 +294,13 @@ public class Product_Pane extends JPanel {
 		P_Non_Refundable_Cheack.setSelected(P.get_NR());
 		P_Non_Discount_Cheack.setSelected(P.get_ND());
 		P_Under_NineTeen_Cheack.setSelected(P.get_UN());
+
+		if(P.get_Rounds().equals("Up"))
+			P_Rounds_Combo.setSelectedIndex(0);
+		else if(P.get_Rounds().equals("Rounds"))
+			P_Rounds_Combo.setSelectedIndex(1);
+		else if(P.get_Rounds().equals("Down"))
+			P_Rounds_Combo.setSelectedIndex(2);
 	}
 	private void Search_Product(String Combo, String search_text) {
 		DefaultTableModel model=(DefaultTableModel)Search_Table.getModel();
